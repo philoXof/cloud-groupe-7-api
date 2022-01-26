@@ -18,10 +18,10 @@ app.post("/add", async function (req, res){
         res.status(400).send('Missing attributes').end();
     }
 
-    const db = new Database();
-    const imageController = new ImageController(db);
+    const db = await new Database();
+    const imageController = await new ImageController(db);
 
-    const imageAdded = imageController.add(firstname, lastname, url);
+    const imageAdded = await imageController.add(firstname, lastname, url);
 
     if(imageAdded){
         res.json(imageAdded);

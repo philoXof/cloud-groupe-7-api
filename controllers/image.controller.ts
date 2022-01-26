@@ -10,8 +10,6 @@ export class ImageController {
     }
 
 
-
-
     public async add(firstname: string, lastname: string, url: string): Promise<QueryResult | null>{
 
         if(firstname === undefined || lastname === undefined || url === undefined){
