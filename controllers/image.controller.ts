@@ -27,7 +27,7 @@ export class ImageController {
     public async getAll(): Promise<QueryResult | undefined>{
 
         try {
-            return await this.database.connection.query('SELECT * from image');
+            return await this.database.connection.query("SELECT * from image");
         } catch (e){
         }
         return;
