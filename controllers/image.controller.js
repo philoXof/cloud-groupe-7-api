@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ImageController = void 0;
+const { Pool } = require("pg");
 class ImageController {
     constructor(database) {
         this.database = database;
@@ -17,22 +18,47 @@ class ImageController {
     add(firstname, lastname, url) {
         return __awaiter(this, void 0, void 0, function* () {
             if (firstname === undefined || lastname === undefined || url === undefined) {
-                return null;
+                return false;
             }
-            return yield this.database.connection.query(`INSERT INTO image VALUES(
-                                                                                    ${lastname}, 
-                                                                                    ${firstname}, 
-                                                                                    ${url})`);
+            const pool = new Pool(this.database.connection);
+            const text = `INSERT INTO image (firstname, lastname, url) VALUES ($1, $2, $3);`;
+            const values = [firstname, lastname, url];
+            const request = yield pool.query(text, values);
+            return request.rowCount;
+        });
+    }
+    firstnameExists(firstname) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (firstname === undefined) {
+                console.log("Firstname is undefined in controller");
+                return false;
+            }
+            const pool = new Pool(this.database.connection);
+            const text = `SELECT * FROM image WHERE firstname = $1;`;
+            const values = [firstname];
+            const request = yield pool.query(text, values);
+            return request.rowCount != 0;
         });
     }
     getAll() {
         return __awaiter(this, void 0, void 0, function* () {
-            try {
-                return yield this.database.connection.query("SELECT * from image");
+            const pool = new Pool(this.database.connection);
+            const request = yield pool.query('select * from image');
+            yield pool.end();
+            return request.rows;
+        });
+    }
+    getByFirstname(firstname) {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (firstname === undefined) {
+                console.log("Firstname is undefined in controller");
+                return false;
             }
-            catch (e) {
-            }
-            return;
+            const pool = new Pool(this.database.connection);
+            const text = `SELECT * FROM image WHERE firstname = $1;`;
+            const values = [firstname];
+            const request = yield pool.query(text, values);
+            return request.rows;
         });
     }
 }

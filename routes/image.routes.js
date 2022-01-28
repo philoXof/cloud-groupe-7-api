@@ -26,14 +26,19 @@ app.post("/add", function (req, res) {
             res.status(400).send('Missing attributes').end();
         }
         const db = yield new database_connection_1.Database();
-        const imageController = yield new image_controller_1.ImageController(db);
+        const imageController = new image_controller_1.ImageController(db);
+        const firstnameExists = yield imageController.firstnameExists(firstname);
+        if (firstnameExists) {
+            res.status(400).send('This firstname already exists').end();
+            return;
+        }
         const imageAdded = yield imageController.add(firstname, lastname, url);
         if (imageAdded) {
-            res.json(imageAdded);
+            res.send('User create successfully');
             res.status(201).end();
         }
         else {
-            res.status(404).end();
+            res.status(404).send('Internal Server Error').end();
         }
     });
 });
@@ -41,13 +46,31 @@ app.get("/images", function (req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         const db = new database_connection_1.Database();
         const imageController = new image_controller_1.ImageController(db);
-        const images = imageController.getAll();
+        const images = yield imageController.getAll();
         if (images) {
             res.json(images);
             res.status(201).end();
         }
         else {
-            res.status(404).end();
+            res.status(404).send('Internal Server Error').end();
+        }
+    });
+});
+app.get("/images/:firstname", function (req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const firstname = req.params.firstname;
+        if (firstname === undefined) {
+            res.status(400).send('Missing firstname').end();
+        }
+        const db = new database_connection_1.Database();
+        const imageController = new image_controller_1.ImageController(db);
+        const imagesByFirstname = yield imageController.getByFirstname(firstname);
+        if (imagesByFirstname) {
+            res.json(imagesByFirstname);
+            res.status(201).end();
+        }
+        else {
+            res.status(404).send('Internal Server Error').end();
         }
     });
 });
