@@ -7,7 +7,6 @@ const app = express();
 
 app.get('/test', (req, res) => res.send('Coucou je suis la route de test'));
 
-
 app.post("/add", async function (req, res){
 
     const firstname = req.body.firstname;

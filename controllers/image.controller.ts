@@ -1,5 +1,4 @@
 import {Database} from "../database/database.connection";
-
 const { Pool } = require("pg");
 
 
@@ -26,7 +25,6 @@ export class ImageController {
         return request.rowCount;
     }
 
-
     public async firstnameExists(firstname: string): Promise<boolean>{
         if(firstname === undefined) {
             console.log("Firstname is undefined in controller");
@@ -41,7 +39,6 @@ export class ImageController {
 
         return request.rowCount != 0;
     }
-
 
     public async getAll(){
 
@@ -67,7 +64,4 @@ export class ImageController {
 
         return request.rows;
     }
-
-
-
 }
