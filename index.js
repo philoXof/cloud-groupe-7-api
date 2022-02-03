@@ -5,8 +5,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const cors = require('cors');
 const app = (0, express_1.default)();
 const image_routes_1 = __importDefault(require("./routes/image.routes"));
+image_routes_1.default.use(cors());
 app.use(body_parser_1.default.json());
 app.use(image_routes_1.default);
 const port = process.env.PORT || 3000;
