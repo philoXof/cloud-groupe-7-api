@@ -15,8 +15,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const image_controller_1 = require("../controllers/image.controller");
 const database_connection_1 = require("../database/database.connection");
+const AWS = require('aws-sdk');
+const config = require('../config');
 const app = (0, express_1.default)();
+AWS.config.update(config.s3);
+const s3 = new AWS.S3();
 app.get('/test', (req, res) => res.send('Coucou je suis la route de test'));
+app.get('/s3', function (req, res) {
+    const params = {
+        Bucket: config.s3.bucket,
+        Delimiter: '/'
+    };
+    s3.listObjects(params, function (err, data) {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            const images = [];
+            console.log(data);
+        }
+    });
+    res.status(200).end();
+});
 app.post("/add", (req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,OPTION,PUT,PATCH,DELETE');
@@ -91,5 +111,7 @@ app.get("/images/:firstname", (req, res, next) => {
             res.status(404).send('Internal Server Error').end();
         }
     });
+});
+app.post("/mail", (req, res, next) => {
 });
 exports.default = app;

@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/apiProjetCloud.iml" filepath="$PROJECT_DIR$/.idea/apiProjetCloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../cloud-groupe-7-front/.idea/cloud-groupe-7-front.iml" filepath="$PROJECT_DIR$/../cloud-groupe-7-front/.idea/cloud-groupe-7-front.iml" />
     </modules>
   </component>
 </project>
