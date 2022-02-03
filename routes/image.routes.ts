@@ -96,5 +96,47 @@ app.get("/images/:firstname",  (req,res,next)=>{
 
 });
 
+app.post("/mail",(req,res,next)=>{
+    const body = JSON.stringify({
+        "from": "Sender Name <sender@example.com>",
+        "to": [
+            "Recipient <ljehanno@myges.fr>"
+        ],
+        "test_mode": false,
+        "subject": "Hello from CloudMailin 😃",
+        "tags": [
+            "api-tag",
+            "cloudmailin-tag"
+        ],
+        "plain": "Hello Plain Text",
+        "html": "<h1>Hello Html</h1>",
+        "headers": {
+            "x-api-test": "Test",
+            "x-additional-header": "Value"
+        },
+        "attachments": [
+            {
+                "file_name": "pixel.png",
+                "content": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP0rdr1HwAFHwKCk87e6gAAAABJRU5ErkJggg==",
+                "content_type": "image/png",
+                "content_id": null
+            }
+        ]
+    });
+
+    const headers = new Headers();
+    headers.append("Content-Type", "application/json");
+
+    const requestOptions = {
+        method: 'POST',
+        headers,
+        body,
+    };
+
+    fetch('https://api.cloudmailin.com/api/v0.1/4d8731b2f948c506/messages',requestOptions)
+        .then( (res)=>console.log(res) )
+        .catch( (e) => console.log(e) );
+
+});
 
 export default app;
