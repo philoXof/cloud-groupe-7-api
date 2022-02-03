@@ -1,10 +1,12 @@
 import express from 'express';
 import bodyParser from "body-parser";
+const cors = require('cors');
+
 
 const app = express();
 
 import indexRoutes from './routes/image.routes';
-
+indexRoutes.use(cors());
 app.use(bodyParser.json());
 app.use(indexRoutes);
 
