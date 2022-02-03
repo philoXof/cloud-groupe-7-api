@@ -5,15 +5,7 @@ import {Database} from "../database/database.connection";
 
 const app = express();
 
-app.get('/test', (req, res) => res.send('Coucou je suis la route de test'));
-
-app.post("/add", (req,res,next)=>{
-    res.setHeader('Access-Control-Allow-Origin','*');
-    res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTION,PUT,PATCH,DELETE');
-    res.setHeader('Access-Control-Allow-Headers','X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials','true');
-    next();
-},async function (req, res){
+app.get('/test',async function (req, res){
 
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
