@@ -7,11 +7,14 @@ const app = express();
 
 app.get('/test', (req, res) => res.send('Coucou je suis la route de test'));
 
-app.post("/add", async function (req, res){
+app.post("/add", (req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*');
     res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTION,PUT,PATCH,DELETE');
     res.setHeader('Access-Control-Allow-Headers','X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials','true');
+    next();
+},async function (req, res){
+
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
     const url = req.body.url;
@@ -41,11 +44,14 @@ app.post("/add", async function (req, res){
 });
 
 
-app.get("/images", async function (req, res){
+app.get("/images", (req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*');
     res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTION,PUT,PATCH,DELETE');
     res.setHeader('Access-Control-Allow-Headers','X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials','true');
+    next();
+}, async function (req, res){
+
 
     const db = new Database();
     const imageController = new ImageController(db);
@@ -61,11 +67,14 @@ app.get("/images", async function (req, res){
 
 });
 
-app.get("/images/:firstname", async function (req, res){
+app.get("/images/:firstname",  (req,res,next)=>{
     res.setHeader('Access-Control-Allow-Origin','*');
     res.setHeader('Access-Control-Allow-Methods','GET,POST,OPTION,PUT,PATCH,DELETE');
     res.setHeader('Access-Control-Allow-Headers','X-Requested-With,content-type');
     res.setHeader('Access-Control-Allow-Credentials','true');
+    next();
+},async function (req, res){
+
 
     const firstname = req.params.firstname;
 
