@@ -65,7 +65,7 @@ app.post("/add", (req, res, next) => {
 
         const client = new MessageClient({ username: 'cloud-groupe-7', apiKey: 'kG74gM8yXAhu64JTPArFsSZB'});
         const response = await client.sendMessage({
-            to: 'ljehanno@gmail.com',
+            to: 'ljehanno@myges.fr',
             from: '10fbd55584d292afae1f@cloudmailin.net',
             plain: 'test message',
             html:  '<h1>Test Message</h1>',
