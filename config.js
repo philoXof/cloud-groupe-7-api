@@ -1,9 +1,9 @@
 "use strict";
 module.exports = {
     s3: {
-        accessKeyId: 'N225UJN5J0MTKF4XQG2O',
-        secretAccessKey: 'OD6euIyOHbFcGDwzgShtBzeQMz7BSRjKe7ckOKeM',
+        accessKeyId: 'USJ8NJSYI46G20IHNGRS',
+        secretAccessKey: 'TM93UidKwT3ElUUUnzntencmeOQ7dVAzn6UOGZde',
         endpoint: 's3.eu-west-1.wasabisys.com',
-        bucket: 'cloud-api', // TODO
+        bucket: 'cloud-groupe-7-api', 
     },
 };
