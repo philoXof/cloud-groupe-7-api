@@ -1,9 +1,9 @@
 module.exports = {
     s3: {
-        accessKeyId: 'N225UJN5J0MTKF4XQG2O', // TODO
-        secretAccessKey: 'OD6euIyOHbFcGDwzgShtBzeQMz7BSRjKe7ckOKeM', // TODO
-        endpoint: 's3.eu-west-1.wasabisys.com', // TODO
-        bucket: 'cloud-api', // TODO
+        accessKeyId: 'USJ8NJSYI46G20IHNGRS',
+        secretAccessKey: 'TM93UidKwT3ElUUUnzntencmeOQ7dVAzn6UOGZde',
+        endpoint: 's3.eu-west-1.wasabisys.com',
+        bucket: 'cloud-groupe-7-api', 
     },
 };
 
