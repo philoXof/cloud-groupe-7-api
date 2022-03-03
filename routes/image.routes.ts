@@ -3,7 +3,6 @@ import { ImageController } from "../controllers/image.controller";
 import { Database } from "../database/database.connection";
 import { AWSError } from "aws-sdk";
 import { ListObjectsOutput } from "aws-sdk/clients/s3";
-import { MessageClient } from "cloudmailin"
 
 const AWS = require('aws-sdk');
 const config = require('../config');
@@ -63,15 +62,7 @@ app.post("/add", (req, res, next) => {
     if (imageAdded) {
 
 
-        const client = new MessageClient({ username: 'cloud-groupe-7', apiKey: 'kG74gM8yXAhu64JTPArFsSZB'});
-        const response = await client.sendMessage({
-            to: 'ljehanno@myges.fr',
-            from: '10fbd55584d292afae1f@cloudmailin.net',
-            plain: 'test message',
-            html:  '<h1>Test Message</h1>',
-            subject: "hello world"
-        });
-        console.log(response);
+       
         res.send('User create successfully');
         res.status(201).end();
     } else {
